@@ -104,9 +104,6 @@ class Common {
                 //设置代理
                 opts.host = req.proxy.split(":")[0]
                 opts.port = req.proxy.split(":")[1]
-
-                console.log(opts)
-
                 that.requestHandle(uri, opts, (err, response, body) => {
                     if (err) return reject(err);
                     if (toJson) {

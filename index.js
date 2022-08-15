@@ -35,17 +35,18 @@ app.use(cors());
 
 // movies?type=partial&q=Harry%20Potter
 app.get('/movies', async (req, res, next) => {
+    console.log("/movies")
     const search = new require('./douban-lib/MovieSearch');
     // let { q } = req.params;
     let { q } = req.query;
     let data = await new search().getSearchData(q);
-    console.log(data)
     res.send(data);
 });
 
 
 // movies/1295038
 app.get('/movies/:id', async (req, res, next) => {
+    console.log("/movies/id")
     const handle = new require('./douban-lib/MovieDetail');
     let { id } = req.params;
     let data = await new handle().getMovieData(id);
@@ -55,6 +56,7 @@ app.get('/movies/:id', async (req, res, next) => {
 
 //movies/2043546/celebrities
 app.get('/movies/:id/celebrities', async (req, res, next) => {
+    console.log("/movies/:id/celebrities")
     const handle = new require('./douban-lib/MovieDetail');
     let { id } = req.params;
     let data = await new handle().getCelibritiesData(id);
@@ -63,6 +65,7 @@ app.get('/movies/:id/celebrities', async (req, res, next) => {
 
 //movies/2043546/celebrities
 app.get('/photo/:id', async (req, res, next) => {
+    console.log("/photo/:id")
     const handle = new require('./douban-lib/MoviePhotos');
     let { id } = req.params;
     let data = await new handle().getPhotoData(id);
