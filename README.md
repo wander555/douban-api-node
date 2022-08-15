@@ -6,20 +6,20 @@ It's inspired by the flowing projects
 - [douban](https://github.com/deepsearun/douban "douban")
 
 ## 1. How to run
-### 1. NodeJS
+### NodeJS
 ```bash
 npm install
 node index.js
 ```
-### 2. Docker
+### Docker
 ```bash
 docker build . -t xxxx/douan-api-node
 docker run -p 6501:6501 -d --name douan-api xxxx/douan-api-node
 ```
 
 ## 2. What to use
-### 1. Server Side of Jellyfin Plugin
-### 2. a Simple API
+### Server Side of Jellyfin Plugin
+### a Simple API
 
 
 
