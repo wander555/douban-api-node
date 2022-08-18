@@ -72,15 +72,6 @@ class Common {
                 resolve(body);
             })
         })
-
-
-        // this.requestHandle(uri, (err, response, body) => {
-        //     if (err) return ""
-        //     try {
-        //         body = JSON.parse(body);
-        //         return body
-        //     } catch (e) {}
-        // })
     }
 
     /**
@@ -92,14 +83,11 @@ class Common {
      */
     request(uri, opts, toJson = false) {
         return new Promise((resolve, reject) => {
-
             let that = this
-
-
-            this.getProxy("http://demo.spiderpy.cn/get/").then(function(req) {
+            this.getProxy("http://www.wander555.tk:5010/get/").then(function(req) {
                 var UserAgent = "Mozilla/5.0(WindowsNT10.0;Win64;x64)AppleWebKit/537.36(KHTML,likeGecko)Chrome/" + 59 + Math.round(Math.random() * 10) + ".0.3497." + Math.round(Math.random() * 100) + "Safari/537.36"
                 opts.headers['user-agent'] = UserAgent;
-                opts.headers['cookie'] = that.cookie;
+                // opts.headers['cookie'] = that.cookie;
 
                 //设置代理
                 opts.host = req.proxy.split(":")[0]

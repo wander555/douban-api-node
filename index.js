@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 6501;
+const port = 6502;
 
 // API异常处理
 const ApiException = (message, errorCode = 999, status = 500) => {
@@ -30,6 +30,31 @@ app.use((err, req, res, next) => {
 
 //跨域
 app.use(cors());
+
+
+// movies?type=partial&q=Harry%20Potter
+app.get('/bus', async (req, res, next) => {
+    console.log("/bus")
+    const search = new require('./bus-lib/MovieSearch');
+    // let { q } = req.params;
+    let { q } = req.query;
+
+    let i = 0;
+
+
+    for (let i = 0; i < 8; i++) {
+        let data = await new search().getSearchData(q.toUpperCase());
+        if (data.length == 0) {
+            // data = await new search().getSearchData(q.toUpperCase());
+            i++;
+        } else {
+            res.send(data);
+            break;
+        }
+        console.log("i=", i)
+    }
+
+});
 
 
 
