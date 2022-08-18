@@ -32,6 +32,11 @@ class Search extends Common {
      * @returns array
      */
     async getSearchData(keyword) {
+
+        keyword = keyword.replaceAll(" ", '/')
+        keyword = keyword.split("//")[0].replaceAll("/", " ")
+        console.log("after keyword:" + keyword)
+
         let start = 0;
         let finalList = [];
         const url = 'https://www.douban.com/j/search?q=' + this.encodeURL(keyword) + '&start=' + start + '&cat=1002';
@@ -45,6 +50,8 @@ class Search extends Common {
         if (!res) return finalList;
         try {
             let items = res.items;
+            if (items.length == 0) return finalList;
+
             finalList.push(this.parseSearchData(items[0]))
         } catch (e) {
             console.log(e)

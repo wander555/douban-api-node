@@ -42,16 +42,15 @@ app.get('/bus', async (req, res, next) => {
     let i = 0;
 
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 20; i++) {
+        console.log("i=" + i);
         let data = await new search().getSearchData(q.toUpperCase());
         if (data.length == 0) {
-            // data = await new search().getSearchData(q.toUpperCase());
-            i++;
+            continue;
         } else {
             res.send(data);
             break;
         }
-        console.log("i=", i)
     }
 
 });
@@ -61,11 +60,35 @@ app.get('/bus', async (req, res, next) => {
 // movies?type=partial&q=Harry%20Potter
 app.get('/movies', async (req, res, next) => {
     console.log("/movies")
-    const search = new require('./douban-lib/MovieSearch');
+
     // let { q } = req.params;
     let { q } = req.query;
-    let data = await new search().getSearchData(q);
-    res.send(data);
+    console.log("q=" + q);
+
+    let re = /^[A-Za-z]+$/;
+    if (q.charAt(0).match(re) != null && q.indexOf("-") != -1) {
+        const search = new require('./bus-lib/MovieSearch');
+        let i = 0;
+        for (let i = 0; i < 20; i++) {
+            console.log("i=" + i);
+            let data = await new search().getSearchData(q.toUpperCase());
+            if (data.length == 0) {
+                continue;
+            } else {
+                res.send(data);
+                break;
+            }
+        }
+
+    } else {
+
+        const search = new require('./douban-lib/MovieSearch');
+        let data = await new search().getSearchData(q);
+        res.send(data);
+
+    }
+
+
 });
 
 

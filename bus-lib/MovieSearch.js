@@ -8,31 +8,19 @@ class Search extends Common {
      */
     parseSearchData(dom, keyword) {
         const $content = this.cheerio.load(dom);
-        // console.log($content.html())
-        // let sid = new URL($content('.movie-box').attr('href')).searchParams.get('url');
-        // sid = sid.replace('https://movie.douban.com/', '').split('/').filter(v => v).pop();
         let sid = keyword;
         let name = $content('.photo-frame>img').attr('title')
-        let img = $content('.photo-frame>img').attr('src')
+        let img = 'https://www.javbus.com'+$content('.photo-frame>img').attr('src').replace("thumb","cover").replace(".jpg","_b.jpg")
         let year = $content('.photo-info>span>date').text()
         year = year.replace(keyword, '')
-        // let rating = $content('.rating_nums').text() || '0.0';
-
-        // let img = this.toImage($content('img').attr('src'));
-        // let subject = $content('.subject-cast').text().replace(/\s/g, "");
-        // let subjectArray = subject.split('/');
-        // let year = subjectArray.pop();
+        let rating = '10.0'
         return {
             sid,
             name,
-            // rating,
+            rating,
             img,
             year
         };
-        // console.log(name)
-        // console.log(img)
-        // console.log(year)
-
     }
 
     /**
@@ -58,10 +46,6 @@ class Search extends Common {
             return finalList;
         }
         try {
-            let items = res.item;
-            // console.log(res);
-
-
             finalList.push(this.parseSearchData(res, keyword))
         } catch (e) {
             console.log(e)
