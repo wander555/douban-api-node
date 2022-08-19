@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 6502;
+const port = 6501;
 
 // API异常处理
 const ApiException = (message, errorCode = 999, status = 500) => {

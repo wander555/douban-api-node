@@ -12,9 +12,14 @@ npm install
 node index.js
 ```
 ### Docker
+#### build
 ```bash
 docker build . -t xxxx/douan-api-node
 docker run -p 6501:6501 -d --name douan-api xxxx/douan-api-node
+```
+#### run
+```bash
+docker run -p 6501:6501 -d --name douan-api wander555/douan-api-node
 ```
 
 ## 2. What to use
